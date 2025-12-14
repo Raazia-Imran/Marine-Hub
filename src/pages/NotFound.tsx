@@ -1,7 +1,9 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Ship, Home } from "lucide-react";
 
-const NotFound = () => {
+export default function NotFound() {
   const location = useLocation();
 
   useEffect(() => {
@@ -9,16 +11,22 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-muted-foreground">Oops! Page not found</p>
-        <a href="/" className="text-primary underline hover:text-primary/90">
-          Return to Home
-        </a>
+    <div className="min-h-[70vh] flex items-center justify-center bg-secondary/30 animate-fade-in">
+      <div className="text-center px-4">
+        <div className="w-24 h-24 gradient-ocean rounded-full flex items-center justify-center mx-auto mb-8 animate-float">
+          <Ship className="w-12 h-12 text-primary-foreground" />
+        </div>
+        <h1 className="text-6xl font-bold text-foreground mb-4">404</h1>
+        <p className="text-xl text-muted-foreground mb-8">
+          Oops! This page seems to have drifted off course.
+        </p>
+        <Button variant="hero" size="lg" asChild>
+          <Link to="/">
+            <Home className="w-5 h-5" />
+            Return to Home
+          </Link>
+        </Button>
       </div>
     </div>
   );
-};
-
-export default NotFound;
+}
