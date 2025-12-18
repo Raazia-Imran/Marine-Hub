@@ -12,6 +12,8 @@ import { supabase } from "@/integrations/supabase/client";
 // Pages
 import Home from "@/pages/Home";
 import Membership from "@/pages/Membership";
+import IndividualForm from "@/pages/IndividualForm";
+import CoralForm from "@/pages/CoralForm";
 import Marketplace from "@/pages/Marketplace";
 import OceanData from "@/pages/OceanData";
 import Academy from "@/pages/Academy";
@@ -67,6 +69,8 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/membership" element={<Membership />} />
+          <Route path="/membership/individualform" element={<IndividualForm />} />
+          <Route path="/membership/coralform" element={<CoralForm />} />
           <Route path="/marketplace" element={<Marketplace />} />
           <Route path="/data" element={<OceanData />} />
           <Route path="/academy" element={<Academy />} />

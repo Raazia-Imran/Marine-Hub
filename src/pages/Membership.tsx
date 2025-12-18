@@ -1,285 +1,302 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
-import { Users, Briefcase, Lock, CheckCircle } from "lucide-react";
+import { Users, Rocket, Building2, GraduationCap, Briefcase, Lightbulb, ArrowRight, CheckCircle } from "lucide-react";
 
-export default function Membership() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [profile, setProfile] = useState({
-    name: "",
-    organization: "",
-    role: "",
-    interests: "",
-    member_type: "Individual",
-  });
 
-  const navigate = useNavigate();
-  const { toast } = useToast();
+export default function MembershipSelection() {
+  const [flippedCard, setFlippedCard] = useState<string | null>(null);
+  const navigate = useNavigate(); // ✅ ADD THIS
 
-  useEffect(() => {
-    // 1. Check if user is logged in
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setIsLoggedIn(!!session);
-      if (session?.user) {
-        fetchProfile(session.user.id);
-      }
-    });
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setIsLoggedIn(!!session);
-      if (session?.user) {
-        fetchProfile(session.user.id);
-      }
-    });
+  const handleCardClick = (path: string) => {
+  navigate(path);
+};
 
-    return () => subscription.unsubscribe();
-  }, []);
+const toggleCard = (id: string) => {
+  setFlippedCard((prev) => (prev === id ? null : id));
+};
 
-  const fetchProfile = async (userId: string) => {
-    try {
-      const { data, error } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("user_id", userId)
-        .single();
-
-      if (error) throw error;
-      if (data) {
-        setProfile({
-          name: data.name || "",
-          organization: data.organization || "",
-          role: data.role || "",
-          interests: data.interests || "",
-          member_type: data.member_type || "Individual",
-        });
-      }
-    } catch (error) {
-      console.error("Error fetching profile:", error);
-    }
-  };
-
-  const handleLogin = () => {
-    // 2. Redirect to the login page
-    navigate("/login");
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (!user) throw new Error("No user found");
-
-      const { error } = await supabase
-        .from("profiles")
-        .update({
-          name: profile.name,
-          organization: profile.organization,
-          role: profile.role,
-          interests: profile.interests,
-          member_type: profile.member_type,
-        })
-        .eq("user_id", user.id);
-
-      if (error) throw error;
-
-      toast({
-        title: "Profile Updated",
-        description: "Your membership profile has been saved successfully.",
-      });
-    } catch (error: any) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: error.message,
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (!isLoggedIn) {
-    return (
-      <div className="py-20 animate-fade-in">
-        <div className="container mx-auto px-4">
-          <div className="max-w-md mx-auto bg-card p-8 rounded-2xl shadow-lg border border-border text-center">
-            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Lock className="w-8 h-8 text-primary" />
-            </div>
-            <h2 className="text-2xl font-bold text-foreground mb-4">
-              Membership Access
-            </h2>
-            <p className="text-muted-foreground mb-8">
-              Please log in to access your digital membership profile, network
-              with peers, and access exclusive resources.
-            </p>
-            <Button variant="hero" className="w-full" onClick={handleLogin}>
-              Login / Register
-            </Button>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
-    <div className="py-12 bg-secondary/30 min-h-screen animate-fade-in">
-      <div className="container mx-auto px-4">
-        <SectionHeader
-          title="My Digital Membership"
-          subtitle="Manage your professional identity and connect with the maritime ecosystem."
-          icon={Users}
-        />
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+      {/* Hero Section */}
+      <div className="container mx-auto px-4 pt-20 pb-12">
+        <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+          <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-500 px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <Users className="w-4 h-4" />
+            Choose Your Path
+          </div>
+          <h1 className="text-5xl font-bold text-gray-900 mb-6">
+            Join Pakistan's Maritime Community
+          </h1>
+          <p className="text-xl text-gray-600 leading-relaxed">
+            Whether you're a professional, institution, or startup innovator, we have a path designed for your maritime journey.
+          </p>
+        </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Profile Card */}
-          <div className="lg:col-span-1">
-            <div className="bg-card rounded-xl border border-border p-6 sticky top-24">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-24 h-24 gradient-ocean rounded-full flex items-center justify-center text-primary-foreground text-3xl font-bold mb-4 shadow-ocean">
-                  {profile.name ? profile.name.charAt(0).toUpperCase() : "M"}
+        {/* Benefits Overview */}
+        <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-16">
+          {[
+            { icon: Users, text: "Network & Collaborate" },
+            { icon: Briefcase, text: "Access Marketplace" },
+            { icon: GraduationCap, text: "Training & Certifications" },
+            { icon: Rocket, text: "Funding Opportunities" }
+          ].map((benefit, idx) => (
+            <div 
+              key={idx}
+              className="bg-white/80 backdrop-blur-sm border border-blue-100 rounded-xl p-4 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            >
+              <benefit.icon className="w-8 h-8 text-cyan-500 mx-auto mb-3" />
+              <p className="text-sm font-medium text-gray-800">{benefit.text}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Membership Cards */}
+        <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {/* Card 1: Individual + Institutional */}
+          <div 
+            className="group perspective-1000"
+            // onMouseEnter={() => setFlippedCard("professional")}
+            // onMouseLeave={() => setFlippedCard(null)}
+            onClick={() => toggleCard("professional")}
+
+          >
+            <div className={`relative w-full h-[550px] transition-transform duration-700 transform-style-3d ${flippedCard === "professional" ? "rotate-y-180" : ""}`}>
+              {/* Front Side */}
+              <div className="absolute inset-0 backface-hidden">
+                <div className="h-full bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl shadow-2xl p-8 flex flex-col justify-between text-white overflow-hidden relative">
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+                  <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-3xl -ml-24 -mb-24"></div>
+                  
+                  <div className="relative z-10">
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6">
+                      <Building2 className="w-8 h-8 text-white" />
+                    </div>
+                    <h2 className="text-3xl font-bold mb-3">
+                      Maritime Professional & Institutional Membership
+                    </h2>
+                    <p className="text-blue-100 text-lg italic mb-6">
+                      "Be Visible. Be Connected. Be Impactful."
+                    </p>
+                  </div>
+
+                  <div className="relative z-10 space-y-4">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                      <h3 className="font-semibold mb-3 flex items-center gap-2">
+                        <CheckCircle className="w-5 h-5" />
+                        What You Get:
+                      </h3>
+                      <ul className="space-y-2 text-sm text-blue-50">
+                        <li>• Digital Membership Profile</li>
+                        <li>• Networking & Collaboration Tools</li>
+                        <li>• Access to Jobs & Marketplace</li>
+                        <li>• Research & Data Resources</li>
+                      </ul>
+                    </div>
+
+                    <button
+                      onClick={() => handleCardClick("/membership/individualform")}
+                      className="w-full bg-white text-cyan-500 py-4 rounded-xl font-semibold hover:bg-blue-50 transition-all duration-300 flex items-center justify-center gap-2 group-hover:scale-105 shadow-lg"
+                    >
+                      Apply Now
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </button>
+
+                    <p className="text-xs text-blue-100 text-center">
+                      Click anywhere to see who can join →
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-foreground">
-                  {profile.name || "New Member"}
-                </h3>
-                <p className="text-primary font-medium mb-1">
-                  {profile.role || "Role Not Set"}
-                </p>
-                <p className="text-muted-foreground text-sm mb-6">
-                  {profile.organization || "Organization Not Set"}
-                </p>
+              </div>
 
-                <div className="w-full pt-6 border-t border-border space-y-3">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Status</span>
-                    <span className="px-2 py-0.5 bg-accent/20 text-accent rounded-full text-xs font-semibold flex items-center gap-1">
-                      <CheckCircle className="w-3 h-3" />
-                      Active
-                    </span>
+              {/* Back Side */}
+              <div className="absolute inset-0 backface-hidden rotate-y-180">
+                <div className="h-full bg-gradient-to-br from-cyan-500 to-blue-500 rounded-2xl shadow-2xl p-8 flex flex-col text-white">
+                  <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                    <Users className="w-6 h-6" />
+                    Who Can Join?
+                  </h3>
+                  
+                  <div className="flex-1 grid grid-cols-1 gap-3 mb-6">
+                    {[
+                      { icon: GraduationCap, title: "Students & Researchers" },
+                      { icon: Briefcase, title: "Maritime Professionals" },
+                      { icon: Building2, title: "Universities & Institutes" },
+                      { icon: Users, title: "Companies & Businesses" },
+                      { icon: Lightbulb, title: "NGOs & Government" }
+                    ].map((item, idx) => (
+                      <div key={idx} className="bg-white/15 backdrop-blur-sm rounded-lg p-3 hover:bg-white/25 transition-all">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <item.icon className="w-5 h-5" />
+                          </div>
+                          <h4 className="font-semibold text-base">{item.title}</h4>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Member Type</span>
-                    <span className="text-foreground font-medium">
-                      {profile.member_type}
-                    </span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Member Since</span>
-                    <span className="text-foreground font-medium">
-                      Dec 2025
-                    </span>
-                  </div>
+
+                  <button
+                    onClick={() => handleCardClick("/membership/individualform")}
+                    className="w-full bg-white text-cyan-500 py-4 rounded-xl font-semibold hover:bg-blue-50 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg"
+                  >
+                    Apply Now
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Edit Form */}
-          <div className="lg:col-span-2">
-            <div className="bg-card rounded-xl border border-border p-8">
-              <h3 className="text-lg font-bold text-foreground mb-6 flex items-center gap-2">
-                <Briefcase className="w-5 h-5 text-primary" />
-                Update Profile Information
-              </h3>
+          {/* Card 2: Coral Community */}
+          <div 
+            className="group perspective-1000"
+            // onMouseEnter={() => setFlippedCard("coral")}
+            // onMouseLeave={() => setFlippedCard(null)}
+            onClick={() => toggleCard("coral")}
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Full Name
-                    </label>
-                    <input
-                      value={profile.name}
-                      onChange={(e) =>
-                        setProfile({ ...profile, name: e.target.value })
-                      }
-                      required
-                      className="w-full px-4 py-2 bg-background border border-input rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all"
-                      placeholder="e.g. Ali Ahmed"
-                    />
+
+          >
+            <div className={`relative w-full h-[550px] transition-transform duration-700 transform-style-3d ${flippedCard === "coral" ? "rotate-y-180" : ""}`}>
+              {/* Front Side */}
+              <div className="absolute inset-0 backface-hidden">
+                <div className="h-full bg-gradient-to-br from-emerald-500 to-teal-500 rounded-2xl shadow-2xl p-8 flex flex-col justify-between text-white overflow-hidden relative">
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+                  <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-3xl -ml-24 -mb-24"></div>
+                  
+                  <div className="relative z-10">
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6">
+                      <Rocket className="w-8 h-8 text-white" />
+                    </div>
+                    <h2 className="text-3xl font-bold mb-3">
+                      Coral Community – Ocean Startup Incubation
+                    </h2>
+                    <p className="text-emerald-100 text-lg italic mb-6">
+                      "Turn Ocean Ideas into Scalable Impact"
+                    </p>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Organization / Institute
-                    </label>
-                    <input
-                      value={profile.organization}
-                      onChange={(e) =>
-                        setProfile({ ...profile, organization: e.target.value })
-                      }
-                      required
-                      className="w-full px-4 py-2 bg-background border border-input rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all"
-                      placeholder="e.g. KPT"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Job Title / Role
-                    </label>
-                    <input
-                      value={profile.role}
-                      onChange={(e) =>
-                        setProfile({ ...profile, role: e.target.value })
-                      }
-                      required
-                      className="w-full px-4 py-2 bg-background border border-input rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all"
-                      placeholder="e.g. Marine Engineer"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Membership Category
-                    </label>
-                    <select
-                      value={profile.member_type}
-                      onChange={(e) =>
-                        setProfile({ ...profile, member_type: e.target.value })
-                      }
-                      className="w-full px-4 py-2 bg-background border border-input rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all"
+
+                  <div className="relative z-10 space-y-4">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                      <h3 className="font-semibold mb-3 flex items-center gap-2">
+                        <CheckCircle className="w-5 h-5" />
+                        What You Get:
+                      </h3>
+                      <ul className="space-y-2 text-sm text-emerald-50">
+                        <li>• Mentorship & Technical Support</li>
+                        <li>• Access to Labs & Field Resources</li>
+                        <li>• Funding & Investment Opportunities</li>
+                        <li>• IP & Patent Guidance</li>
+                      </ul>
+                    </div>
+
+                    <button
+                      onClick={() => handleCardClick("/membership/coralform")}
+                      className="w-full bg-white text-emerald-600 py-4 rounded-xl font-semibold hover:bg-emerald-50 transition-all duration-300 flex items-center justify-center gap-2 group-hover:scale-105 shadow-lg"
                     >
-                      <option value="Individual">
-                        Individual (Student/Pro)
-                      </option>
-                      <option value="Institutional">Institutional</option>
-                      <option value="Corporate">Corporate</option>
-                      <option value="Community">Community/NGO</option>
-                    </select>
+                      Apply Now
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </button>
+
+                    <p className="text-xs text-emerald-100 text-center">
+                      Click anywhere see who can apply →
+                    </p>
                   </div>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Areas of Interest
-                  </label>
-                  <textarea
-                    value={profile.interests}
-                    onChange={(e) =>
-                      setProfile({ ...profile, interests: e.target.value })
-                    }
-                    rows={3}
-                    className="w-full px-4 py-2 bg-background border border-input rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all resize-none"
-                    placeholder="e.g. Deep sea mining, Coastal tourism, Sustainable fisheries..."
-                  />
-                </div>
+              </div>
 
-                <div className="flex justify-end pt-4">
-                  <Button variant="navy" type="submit" disabled={loading}>
-                    {loading ? "Saving..." : "Save Changes"}
-                  </Button>
+              {/* Back Side */}
+              <div className="absolute inset-0 backface-hidden rotate-y-180">
+                <div className="h-full bg-gradient-to-br from-teal-500 to-emerald-500 rounded-2xl shadow-2xl p-8 flex flex-col text-white">
+                  <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                    <Rocket className="w-6 h-6" />
+                    Who Can Apply?
+                  </h3>
+                  
+                  <div className="flex-1 space-y-3 mb-6">
+                    {[
+                      { icon: Rocket, title: "Ocean Tech Startups" },
+                      { icon: Lightbulb, title: "Youth Innovators" },
+                      { icon: Users, title: "Women-led Enterprises" },
+                      { icon: Building2, title: "Community Entrepreneurs" }
+                    ].map((item, idx) => (
+                      <div key={idx} className="bg-white/15 backdrop-blur-sm rounded-lg p-3 hover:bg-white/25 transition-all">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <item.icon className="w-5 h-5" />
+                          </div>
+                          <h4 className="font-semibold text-base">{item.title}</h4>
+                        </div>
+                      </div>
+                    ))}
+
+                  </div>
+
+                  <button
+                    onClick={() => handleCardClick("/membership/coralform")}
+                    className="w-full bg-white text-emerald-600 py-4 rounded-xl font-semibold hover:bg-emerald-50 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg"
+                  >
+                    Apply Now
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Footer Info */}
+        <div className="max-w-4xl mx-auto mt-16 text-center">
+          <div className="bg-white/60 backdrop-blur-sm border border-blue-100 rounded-2xl p-8">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Still Not Sure Which Path to Choose?
+            </h3>
+            <p className="text-gray-600 mb-6 leading-relaxed">
+              <strong className="text-cyan-500">Professional Membership</strong> is for individuals, companies, universities, and organizations looking to network, collaborate, and access maritime resources.
+              <br />
+              <strong className="text-emerald-600">Coral Community</strong> is specifically for startups and innovators who need incubation support, mentorship, and funding to scale their ocean-based ideas.
+            </p>
+            <p className="text-sm text-gray-500">
+              Questions? Contact us at <a href="mailto:info@maritime-hub.pk" className="text-cyan-500 hover:underline">info@maritime-hub.pk</a>
+            </p>
+          </div>
+        </div>
       </div>
+
+      <style>{`
+        .perspective-1000 {
+          perspective: 1000px;
+        }
+        
+        .transform-style-3d {
+          transform-style: preserve-3d;
+        }
+        
+        .backface-hidden {
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+        }
+        
+        .rotate-y-180 {
+          transform: rotateY(180deg);
+        }
+        
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-fade-in {
+          animation: fade-in 0.8s ease-out;
+        }
+      `}</style>
     </div>
   );
 }
