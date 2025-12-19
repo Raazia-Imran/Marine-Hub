@@ -1,14 +1,13 @@
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Button } from "@/components/ui/button";
 import {
-  Lightbulb,
-  Rocket,
-  Target,
-  Sprout,
-  ShieldCheck,
-  Users,
   Globe,
   Landmark,
+  Lightbulb,
+  Rocket,
+  ShieldCheck,
+  Sprout,
+  Target,
+  Users,
 } from "lucide-react";
 
 export default function Incubator() {
