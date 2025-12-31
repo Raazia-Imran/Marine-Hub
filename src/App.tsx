@@ -19,7 +19,8 @@ import OceanData from "@/pages/OceanData";
 import Academy from "@/pages/Academy";
 import Incubator from "@/pages/Incubator";
 import NotFound from "@/pages/NotFound";
-import Login from "@/pages/Login"; // Import the new page
+import Login from "@/pages/Login";
+import RecentActivities from "@/pages/RecentActivities"; // 👈 IMPORT THIS
 
 const queryClient = new QueryClient();
 
@@ -29,12 +30,10 @@ function AppContent() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setIsLoggedIn(!!session);
     });
 
-    // Listen for auth changes
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -44,10 +43,7 @@ function AppContent() {
     return () => subscription.unsubscribe();
   }, []);
 
-  const handleLogin = () => {
-    // Redirect to the login page
-    navigate("/login");
-  };
+  const handleLogin = () => navigate("/login");
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -69,12 +65,17 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/membership" element={<Membership />} />
-          <Route path="/membership/individualform" element={<IndividualForm />} />
+          <Route
+            path="/membership/individualform"
+            element={<IndividualForm />}
+          />
           <Route path="/membership/coralform" element={<CoralForm />} />
           <Route path="/marketplace" element={<Marketplace />} />
           <Route path="/data" element={<OceanData />} />
           <Route path="/academy" element={<Academy />} />
           <Route path="/incubator" element={<Incubator />} />
+          <Route path="/activities" element={<RecentActivities />} />{" "}
+          {/* 👈 ADD THIS LINE */}
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

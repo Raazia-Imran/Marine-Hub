@@ -10,14 +10,16 @@ import {
   Database,
   GraduationCap,
   Lightbulb,
+  Calendar, //  IMPORT CALENDAR ICON
   Menu,
   X,
-  User,
   LogOut,
 } from "lucide-react";
 
+//  UPDATED LIST
 const navItems = [
   { path: "/", label: "Home", icon: Anchor },
+  { path: "/activities", label: "Activities", icon: Calendar }, // 👈 ADD THIS LINE
   { path: "/membership", label: "Membership", icon: Users },
   { path: "/marketplace", label: "Marketplace", icon: Briefcase },
   { path: "/data", label: "Ocean Data", icon: Database },
@@ -31,7 +33,11 @@ interface NavigationProps {
   onLogout?: () => void;
 }
 
-export function Navigation({ isLoggedIn = false, onLogin, onLogout }: NavigationProps) {
+export function Navigation({
+  isLoggedIn = false,
+  onLogin,
+  onLogout,
+}: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -56,11 +62,10 @@ export function Navigation({ isLoggedIn = false, onLogin, onLogout }: Navigation
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1 absolute left-1/2 -translate-x-1/2 whitespace-nowrap">
-
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = location.pathname === item.path;
-              
+
               return (
                 <Link
                   key={item.path}
@@ -81,11 +86,12 @@ export function Navigation({ isLoggedIn = false, onLogin, onLogout }: Navigation
 
           {/* Auth Section */}
 
-
           {isLoggedIn && (
             <div className="flex items-center space-x-3">
               <div className="text-right">
-                <p className="text-sm font-medium text-primary-foreground">Member</p>
+                <p className="text-sm font-medium text-primary-foreground">
+                  Member
+                </p>
                 <p className="text-xs text-muted-foreground">Active</p>
               </div>
               <Button
@@ -128,7 +134,11 @@ export function Navigation({ isLoggedIn = false, onLogin, onLogout }: Navigation
             className="lg:hidden p-2 text-muted-foreground hover:text-primary-foreground transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
         </div>
       </div>
@@ -140,7 +150,7 @@ export function Navigation({ isLoggedIn = false, onLogin, onLogout }: Navigation
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = location.pathname === item.path;
-              
+
               return (
                 <Link
                   key={item.path}
@@ -158,7 +168,7 @@ export function Navigation({ isLoggedIn = false, onLogin, onLogout }: Navigation
                 </Link>
               );
             })}
-            
+
             <div className="pt-4 border-t border-navy mt-2">
               {/* {isLoggedIn ? (
                 <button
@@ -196,7 +206,6 @@ export function Navigation({ isLoggedIn = false, onLogin, onLogout }: Navigation
                   <span>Sign Out</span>
                 </button>
               )}
-
             </div>
           </div>
         </div>
