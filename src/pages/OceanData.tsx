@@ -255,33 +255,25 @@ export default function OceanData() {
             {/* Featured Item (Large) */}
             <GalleryItem
               image="/images/img-09.png"
-              title="Deep Sea Mapping"
-              desc="Conducting bathymetric surveys off the coast of Gwadar using advanced sonar."
               className="md:col-span-2 md:row-span-2"
-              tag="Featured Expedition"
+
             />
 
             {/* Item 2 */}
             <GalleryItem
               image="/images/img-04.png"
-              title="Lab Analysis"
-              desc="Testing water samples for microplastics and pollutants."
               className="md:col-span-1 md:row-span-1"
             />
 
             {/* Item 3 */}
             <GalleryItem
               image="/images/img-03.png"
-              title="Marine Life Study"
-              desc="Biodiversity cataloging in the Indus Delta mangroves."
               className="md:col-span-1 md:row-span-1"
             />
 
             {/* Item 4 (Wide) */}
             <GalleryItem
               image="/images/img-06.png"
-              title="Coastal Reef Monitoring"
-              desc="Divers assessing coral health and fish population density."
               className="md:col-span-2 md:row-span-1"
             />
             
@@ -413,16 +405,10 @@ function TechCard({
 
 function GalleryItem({
   image,
-  title,
-  desc,
   className,
-  tag,
 }: {
   image: string;
-  title: string;
-  desc: string;
   className?: string;
-  tag?: string;
 }) {
   return (
     <div
@@ -433,7 +419,6 @@ function GalleryItem({
     >
       <img
         src={image}
-        alt={title}
         className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
       />
 
@@ -442,17 +427,6 @@ function GalleryItem({
 
       {/* Content */}
       <div className="absolute bottom-0 left-0 p-6 w-full translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-        {tag && (
-          <span className="bg-blue-600/90 text-white text-[10px] uppercase font-bold px-2 py-1 rounded mb-2 inline-block shadow-sm">
-            {tag}
-          </span>
-        )}
-        <h3 className="text-white font-bold text-lg md:text-xl mb-1">
-          {title}
-        </h3>
-        <p className="text-slate-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75 line-clamp-2">
-          {desc}
-        </p>
       </div>
     </div>
   );
