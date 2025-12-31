@@ -7,7 +7,7 @@ import {
   Phone,
   Facebook,
   Linkedin,
-  Instagram
+  Instagram,
 } from "lucide-react";
 
 export function Footer() {
@@ -22,7 +22,7 @@ export function Footer() {
                 <Ship className="w-6 h-6 text-primary-foreground" />
               </div>
               <span className="font-bold text-lg text-primary-foreground">
-                MSH Pakistan
+                BlueNet+
               </span>
             </div>
 
@@ -62,7 +62,6 @@ export function Footer() {
               >
                 <Instagram className="w-5 h-5" />
               </a>
-
             </div>
           </div>
 

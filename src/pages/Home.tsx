@@ -61,11 +61,11 @@ export default function Home() {
             variant="outline"
             className="mb-6 border-teal-400/50 text-teal-300 px-4 py-1 text-sm tracking-wider uppercase backdrop-blur-md"
           >
-            Pakistan's First Digital Maritime Hub
+            BlueNet+
           </Badge>
 
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight tracking-tight font-heading">
-            Digital Catalyst for <br />
+            Digital Hub for <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-[#FF7F50]">
               Pakistan's Blue Economy
             </span>
