@@ -21,6 +21,7 @@ import Incubator from "@/pages/Incubator";
 import NotFound from "@/pages/NotFound";
 import Login from "@/pages/Login";
 import RecentActivities from "@/pages/RecentActivities"; // 👈 IMPORT THIS
+import Pictures from "@/pages/Picture";
 
 const queryClient = new QueryClient();
 
@@ -71,6 +72,7 @@ function AppContent() {
           />
           <Route path="/membership/coralform" element={<CoralForm />} />
           <Route path="/marketplace" element={<Marketplace />} />
+          <Route path="/pictures" element={<Pictures/>} />
           <Route path="/data" element={<OceanData />} />
           <Route path="/academy" element={<Academy />} />
           <Route path="/incubator" element={<Incubator />} />

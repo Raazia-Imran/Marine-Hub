@@ -254,14 +254,14 @@ export default function OceanData() {
           <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 h-[800px] md:h-[600px]">
             {/* Featured Item (Large) */}
             <GalleryItem
-              image="/images/img-09.png"
+              image="/images/img-11.png"
               className="md:col-span-2 md:row-span-2"
 
             />
 
             {/* Item 2 */}
             <GalleryItem
-              image="/images/img-04.png"
+              image="/images/img-01.png"
               className="md:col-span-1 md:row-span-1"
             />
 
@@ -273,12 +273,24 @@ export default function OceanData() {
 
             {/* Item 4 (Wide) */}
             <GalleryItem
-              image="/images/img-06.png"
+              image="/images/img-10.png"
               className="md:col-span-2 md:row-span-1"
             />
             
           </div>
         </div>
+        {/* See More Button */}
+          <div className="mt-12 flex justify-center">
+            <Button
+              size="lg"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-6 rounded-full text-lg shadow-lg transition-transform hover:scale-105"
+              onClick={() => navigate("/pictures")}
+            >
+              See More
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </div>
+
       </div>
 
       {/* 6. IMPACT GOALS */}
@@ -412,15 +424,17 @@ function GalleryItem({
 }) {
   return (
     <div
-      className={cn(
-        "relative group overflow-hidden rounded-2xl cursor-pointer bg-slate-200",
-        className
-      )}
-    >
+  className={cn(
+    "relative group overflow-hidden rounded-2xl cursor-pointer bg-slate-100 flex items-center justify-center",
+    className
+  )}
+>
+
       <img
         src={image}
-        className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+        className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-105"
       />
+
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-300" />
