@@ -1,0 +1,32 @@
+[33m9376e13[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m file added
+[33m207e519[m[33m ([m[1;31morigin/zohaib[m[33m, [m[1;32mzohaib[m[33m)[m Add images section
+[33m5e8146d[m Title and Description removed
+[33mba2a9c1[m Images added
+[33mcf36aa1[m added images folder
+[33mbb47ba2[m add a new page and rename barnd
+[33m17b3111[m Add ui
+[33m812fdc4[m All UI changes
+[33m9a60800[m Updated multiple pages: Academy, CoralForm, Home, Incubator, IndividualForm, Marketplace, Membership
+[33mfc70a3c[m Merge branch 'main' of https://github.com/Raazia-Imran/Marine-Hub
+[33m58c4eb0[m Merge remote-tracking branch 'origin/zohaib'
+[33m771d2d2[m Merge pull request #1 from Raazia-Imran/zohaib
+[33mc9a2e4f[m Update Incubator page
+[33m6405d54[m all changes frontend + backend
+[33ma6ae5ec[m removed unnecessary details
+[33mc15481f[m ODRC AND HOME PAGE
+[33m21eb6ec[m improving
+[33mdeb9266[m Merge branch 'main' of https://github.com/Raazia-Imran/Marine-Hub
+[33m550f719[m Remove .env from repository
+[33m4a9cffc[m Add .env to .gitignore
+[33m49d5dd1[m Update README
+[33m0c66da8[m Merge branch 'main' of https://github.com/Raazia-Imran/Marine-Hub
+[33ma66f84c[m Update dependencies
+[33m092d586[m Delete README.md
+[33maa6e4a3[m Create Supabase DB and fix trigger
+[33m731588e[m Changes
+[33m7e0062f[m Initial commit
+[33mcf029a2[m Connect to Lovable Cloud
+[33mfa6a2d0[m Changes
+[33meb10289[m Enhance Maritime Hub frontend
+[33m20d8d4a[m Changes
+[33mbebc3a2[m template: new_style_vite_react_shadcn_ts
