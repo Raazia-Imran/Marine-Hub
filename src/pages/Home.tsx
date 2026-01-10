@@ -158,21 +158,21 @@ export default function Home() {
               <CarouselContent className="-ml-4">
                 {[
                   {
-                    title: "Membership Platform",
+                    title: "Stakeholder Platform",
                     desc: "Stakeholder profiles, networking, and smart collaboration tools.",
                     icon: Users,
                     color: "bg-blue-500",
                     link: "/membership",
                   },
                   {
-                    title: "Services Marketplace",
+                    title: "Maritime Marketplace",
                     desc: "Connect with experts, consultants, and marine tech providers.",
                     icon: Briefcase,
                     color: "bg-teal-500",
                     link: "/marketplace",
                   },
                   {
-                    title: "Ocean Data Portal",
+                    title: "Maritime Data Portal",
                     desc: "Real-time access to scientific data, tides, and research findings.",
                     icon: Database,
                     color: "bg-cyan-500",
@@ -186,7 +186,7 @@ export default function Home() {
                     link: "/academy",
                   },
                   {
-                    title: "Startup Incubator",
+                    title: "Maritime Satrtup & Innovation",
                     desc: "Mentorship and funding for OceanTech and aquaculture startups.",
                     icon: Lightbulb,
                     color: "bg-[#FF7F50]",
@@ -259,17 +259,17 @@ export default function Home() {
 
               <div className="space-y-4">
                 <StakeholderRow
-                  title="Government & Policy"
+                  title="Maritime Stakeholders"
                   desc="Maritime Affairs, Ports, Fisheries, Climate Agencies."
                   color="bg-blue-100 text-blue-700"
                 />
                 <StakeholderRow
-                  title="Industry & Private Sector"
+                  title="Public & Private Sector"
                   desc="Shipping, Logistics, Aquaculture, Tourism."
                   color="bg-teal-100 text-teal-700"
                 />
                 <StakeholderRow
-                  title="Academia & Scientists"
+                  title="Academia"
                   desc="Universities, Marine Labs, Research Institutes."
                   color="bg-indigo-100 text-indigo-700"
                 />
@@ -321,17 +321,17 @@ export default function Home() {
                 unheard voices from Pakistan's coastline.
               </p>
               <div className="flex gap-4">
-                <Button className="bg-white text-[#FF7F50] hover:bg-slate-100 border-0 rounded-full px-8">
+                {/* <Button className="bg-white text-[#FF7F50] hover:bg-slate-100 border-0 rounded-full px-8">
                   Read Stories
                 </Button>
                 <Button className="bg-transparent border-2 border-white/40 text-white hover:bg-white/10 rounded-full px-8 transition-colors">
                   Submit Yours
-                </Button>
+                </Button> */}
               </div>
             </div>
 
             <div className="flex-1 grid grid-cols-2 gap-4">
-              <StoryCard
+              {/* <StoryCard
                 img="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80"
                 category="Coastal Women"
                 title="The Guardians of Mangroves"
@@ -341,7 +341,7 @@ export default function Home() {
                 category="Innovation"
                 title="Sailing Against the Tide"
                 className="translate-y-8"
-              />
+              /> */}
             </div>
           </div>
         </div>
@@ -366,13 +366,13 @@ export default function Home() {
           </div>
 
           <div className="mt-12 pt-12 border-t border-slate-800">
-            <Button
+            {/* <Button
               variant="link"
               className="text-teal-400 hover:text-teal-300 text-lg"
             >
               Join the Upcoming Conference{" "}
               <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
+            </Button> */}
           </div>
         </div>
       </div>
