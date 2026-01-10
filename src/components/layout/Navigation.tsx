@@ -56,7 +56,7 @@ export function Navigation({
                 Blue <span className="text-primary">Net+</span>
               </h1>
               <p className="text-[10px] text-muted-foreground uppercase tracking-wider">
-                Maritime Stakeholders Hub
+                Maritime Hub
               </p>
             </div>
           </Link>
