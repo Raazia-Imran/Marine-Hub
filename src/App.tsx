@@ -22,6 +22,7 @@ import NotFound from "@/pages/NotFound";
 import Login from "@/pages/Login";
 import RecentActivities from "@/pages/RecentActivities"; // 👈 IMPORT THIS
 import Pictures from "@/pages/Picture";
+import About from "@/pages/About"; 
 
 const queryClient = new QueryClient();
 
@@ -80,6 +81,7 @@ function AppContent() {
           {/* 👈 ADD THIS LINE */}
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </main>
       <Footer />

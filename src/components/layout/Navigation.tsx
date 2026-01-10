@@ -25,6 +25,7 @@ const navItems = [
   { path: "/data", label: "Ocean Data", icon: Database },
   { path: "/academy", label: "Blue Skills", icon: GraduationCap },
   { path: "/incubator", label: "Incubator", icon: Lightbulb },
+  { path: "/about", label: "About Us", icon: Users },
 ];
 
 interface NavigationProps {
