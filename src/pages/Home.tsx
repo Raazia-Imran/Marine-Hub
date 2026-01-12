@@ -311,7 +311,7 @@ export default function Home() {
       </div>
 
       {/* 5. OCEAN KAFE */}
-      <div className="py-24 bg-[#FF7F50] text-white overflow-hidden relative">
+      {/* <div className="py-24 bg-[#FF7F50] text-white overflow-hidden relative">
         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
 
         <div className="container mx-auto px-4 relative z-10">
@@ -328,17 +328,17 @@ export default function Home() {
                 Your Voice, Your Story. A creative space giving a platform to
                 unheard voices from Pakistan's coastline.
               </p>
-              <div className="flex gap-4">
+              <div className="flex gap-4"> */}
                 {/* <Button className="bg-white text-[#FF7F50] hover:bg-slate-100 border-0 rounded-full px-8">
                   Read Stories
                 </Button>
                 <Button className="bg-transparent border-2 border-white/40 text-white hover:bg-white/10 rounded-full px-8 transition-colors">
                   Submit Yours
                 </Button> */}
-              </div>
-            </div>
+              {/* </div>
+            </div> */}
 
-            <div className="flex-1 grid grid-cols-2 gap-4">
+            {/* <div className="flex-1 grid grid-cols-2 gap-4"> */}
               {/* <StoryCard
                 img="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80"
                 category="Coastal Women"
@@ -350,10 +350,10 @@ export default function Home() {
                 title="Sailing Against the Tide"
                 className="translate-y-8"
               /> */}
-            </div>
+            {/* </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* 6. THE UNHEARD OCEAN */}
       <div className="py-24 bg-slate-900 text-slate-100">
